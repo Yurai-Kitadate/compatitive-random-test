@@ -7,12 +7,11 @@
 
 import Foundation
 
-func parse(){
+func parse() -> String{
     
     var output = ""
     
     while true{
-        print(output)
         let line = readLine()!.components(separatedBy: " ")
         if line == ["end"]{
             break
@@ -28,7 +27,7 @@ func parse(){
         case "dbl":
             output += DoubleVariable(lowerConstraint: Double(line[1])!, upperConstraint: Double(line[2])!).makeRandomCase()
             
-
+            
         case "row":
             if line[1] == "int"{
                 output += RowIntVariable(rowSize: Int64(line[2])!, lowerConstraint: Int64(line[3])!, upperConstraint: Int64(line[4])!).makeRandomCase()
@@ -38,8 +37,8 @@ func parse(){
                 output += ColumnIntVariable(columnSize: Int64(line[2])!, lowerConstraint: Int64(line[3])!, upperConstraint: Int64(line[4])!).makeRandomCase()
             }
         default:
-            return
+            fatalError("unexpected identifier!")
         }
-        
     }
+    return output
 }
